@@ -97,32 +97,60 @@
 							<p class="text-center text-muted">Si vous avez deja un compte, veuilliez vous <a href="signin.html">connecter</a> . </p>
 							<hr>
 
-							<form>
+							<form action="../Admin/PHP/requetes/addUser.php" method="post" >
 								<div class="top-margin">
 									<label>Prenom </label>
-									<input type="text" class="form-control">
+									<input type="text" name="prenom_user" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Nom</label>
-									<input type="text" class="form-control">
+									<input type="text" name="nom_user" class="form-control">
 								</div>
 								<div class="top-margin">
 									<label>Addresse email <span class="text-danger">*</span></label>
-									<input type="email" class="form-control">
+									<input type="email" name="email_user" class="form-control">
+								</div>
+								<div class="top-margin">
+										<label> Adresse 1:</label>
+										<input type="text" name="adresse1" class="form-control"  placeholder="">
+								</div>
+								<div class="top-margin">
+										<label> Adresse 2:</label>
+										<input type="text" name="adresse2" class="form-control"  placeholder="">
+								</div>
+								<div class="top-margin">
+										<label> Code postal :</label>
+										<input type="text" name="codePostal" class="form-control"  placeholder="">
+								</div>
+								<div class="top-margin">
+										<label> Ville :</label>
+										<input type="text" name="nom_ville" class="form-control"  placeholder="">
+								</div>
+								<div class="top-margin">
+										<label> Pays :</label>
+										<input type="text" name="nom_pays" class="form-control"  placeholder="">
 								</div>
 								<div class="top-margin">
 										<label> Pour bénéficier du tarif pro :</label>
 										<input type="text" class="form-control"  placeholder="Numéro de TVA">
-									</div>
+								</div>
+								<div class="top-margin">
+										<label> Nom Entreprise :</label>
+										<input type="text" class="form-control"  placeholder="">
+								</div>
+								<div class="top-margin">
+										<label> Adresse Entreprise :</label>
+										<input type="text" class="form-control"  placeholder="">
+								</div>
 
 								<div class="row top-margin">
 									<div class="col-sm-6">
 										<label>Mot de passe <span class="text-danger">*</span></label>
-										<input type="password" class="form-control">
+										<input type="password" name="pass" class="form-control">
 									</div>
 									<div class="col-sm-6">
 										<label>Confirmez le mot de passe <span class="text-danger">*</span></label>
-										<input type="password" class="form-control">
+										<input type="password" name="pass" class="form-control">
 									</div>
 								</div>
 
@@ -136,7 +164,7 @@
 										</label>                        
 									</div>
 									<div class="col-lg-4 text-right">
-										<button class="btn btn-success" type="submit">Enregistrer</button>
+										<button class="btn btn-success" name="submit" type="submit">Enregistrer</button>
 									</div>
 								</div>
 							</form>
