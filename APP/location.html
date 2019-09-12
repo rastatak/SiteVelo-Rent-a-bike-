@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>Rent a bike - Location vélo </title>
+    <script src="https://kit.fontawesome.com/c8975d4899.js"></script>
+    <link rel="icon" sizes="64x64" href="assets/images/favicon-64.png" type="image/png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Cuprum|Lobster&display=swap" rel="stylesheet"> 
+    
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-theme.css" media="screen">
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+
+<body>
+<!--------bar de navigation -------->
+		<!--------bar de navigation -------->
+	<header id="mainnav" class="row">
+        <!--nav bar et carousel -->
+                <!--------bar de navigation -------->
+                <div class="col-12 ">
+                
+                    <div id="logo" class="row ml-3">
+                        
+                        <a class="navbar-brand" href="../index.html"><img src="../assets/images/logo.png" width="150" height="145"></a>
+                        <a href="../index.html" style="text-decoration: none;" ><h1 class="text-success" >Rent a bike<h2></a>
+                        
+                    </div>
+
+                    
+
+                    <div class="col-12">                    
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+                        
+                
+                
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav form-inline">
+                        <li class="nav-item ">
+                            <a class="nav-link  h2" href="../index.html">Accueil<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link h2" href="location.html">Location</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle nav-link h2" data-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">Nos vélos</a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link h5 ml-3" href="#" data-toggle="modal" data-target="#exampleModalScrollable">Vélo classique</a>
+                                <a class="nav-link h5 ml-3" href="#" data-toggle="modal" data-target="#exampleModalScrollable1" >Vélo électrique</a>
+
+                            </div>
+                        </li>
+                        </ul>
+                        </div>
+                        <a href="signin.html" type="button" class="btn btn-success">
+                        <i class="fas fa-user"></i>
+                        <span class="sr-only"></span>
+                        </a>
+                        </nav>
+
+                    </div>
+
+
+
+                </div>
+                <!--------fin bar de navigation -------->
+			</header>
+	<!-- container -->
+	<div class="container">
+
+		<ol class="breadcrumb mb-5">
+			<li><a href="../index.html">Acceuil</a></li>
+			<li class="text-dark active">/ Location</li>
+		</ol>
+
+		<div class="row">
+
+			<!-- Article main content -->
+			<article class="col-sm-9 maincontent">
+				<header class="page-header">
+					<h1 class="text-info page-title">Location</h1>
+				</header>
+
+
+				<br>
+				<form>
+					<div class="default-select" id="default-select">
+									<select>
+										<option value="" disabled selected hidden>Ville</option>
+										<option value=" 1">Lille</option>
+						<option value="1">Paris</option>
+						<option value="1">Bordeaux</option>
+						<option value="1">Lyon</option>
+						</select>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-3">
+							<input class="form-control" type="date" placeholder="Date">
+						</div>
+						<div class="col-sm-3">
+							<input class="form-control" type="time" placeholder="heureDepart">
+						</div>
+						<div class="col-sm-3">
+							<input class="form-control" type="date" placeholder="dateRetour">
+						</div>
+						<div class="col-sm-3">
+							<input class="form-control" type="time" placeholder="heureDepart">
+						</div>
+					</div>
+					<br>
+				
+
+					<div class="row">
+						<div class="col-sm-6">
+							<label class="checkbox"> </label>
+						</div>
+						<div class="col-sm-6 text-right">
+
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#paiementModal">
+               PAYER
+            </button>
+							
+						</div>
+					</div>
+
+				</form>
+
+			</article>
+			<!-- /Article -->
+
+			<!-- Sidebar -->
+			<aside class="col-sm-3 sidebar sidebar-right">
+				
+
+				<div class="widget">
+					<h4 class="text-center">Vous devez payer :</h4>
+					<hr>
+					
+					<h4 class="text-center">0€</h4>
+
+				</div>
+
+			</aside>
+			<!-- /Sidebar -->
+
+		</div>
+	</div> <!-- /container -->
+
+	<section class="container-full top-space">
+		<div id="map"></div>
+	</section>
+
+	<footer id="footer">
+
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contact</h3>
+						<div class="widget-body">
+							<p>+234 23 9873237<br>
+								<a href="mailto:#">some.email@somewhere.com</a><br>
+								<br>
+								234 Hidden Pond Road, Ashland City, TN 37015
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+>
+					</div>
+
+					<div class="col-md-6 widget">
+						
+						<div class="widget-body">
+							 <p>Aujourd’hui, les villes font de plus en plus d’efforts pour réintroduire le vélo dans le paysage urbain. Entre les pistes cyclables, les parking à vélo, les vélibs et les subventions qui fleurissent un peu partout, qui a encore une bonne raison de ne pas s’y mettre ? Cependant, attention au traffic qui peut être turbulent dans les grandes villes. Un bon vélo de ville se doit d’être fiable et bien équipé (éclairages, garde-boue, sonnette, dynamo de moyeu, béquille...). Lorsque l’on rentre du travail à vélo et que les rues deviennent plus sombres, il est primordial de bien voir et de bien être vu des autres usagers. Puis, avouons-le, on adore le design un peu retro des vélos de ville hollandais, ceux qui ont le plus la côte en ce moment. Vous n’avez plus à choisir entre sécurité et look stylé !</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+		<div class="footer2">
+			<div class="container">
+				<div class="row">
+
+                    <div class="col-md-6 widget">
+                        <div class="widget-body">
+                            <p class="simplenav">
+                                <a href="../index.html">Accueil</a> |
+                                <a href="location.html">Location</a> |
+                                <a href="#">Vélo</a> |
+                                <b><a href="signup.html">S'inscrire</a></b>
+                            </p>
+                        </div>
+                    </div>
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="text-right">
+								Copyright &copy; 2019, Boulanger Eric.
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+	</footer>
+	    <!--modal vélo classique-->
+          <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalScrollableTitle">Vélo classique</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <img class="mt-5" src="../assets/images/velo.jpg">
+                    <div class="text-center">
+                        <h2>Vélo classique</h2>
+                        <p>
+                            <strong>Poids :</strong>21,5 KG.<br>
+                            <strong>ÉCLAIRAGE :</strong>AV/AR PAR DYNAMO.<br>
+                            <strong>ACCESSOIRES :</strong>PORTE BAGAGE - GARDES BOUE - ANTIVOL FER À CHEVAL.<br>
+                         </p>
+                   </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+              <a type="button" class="btn btn-success" href="location.html">Louez moi !</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal vélo electrique-->
+      <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalScrollableTitle1">Vélo électrique</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <img class="mt-5" src="../assets/images/velo1.jpg">
+                    <div class="text-center">
+                        <h2>Vélo électrique</h2>
+                        <p><strong>AUTONOMIE :</strong> 50 À 80 KM SELON ASSISTANCE.<br>
+                          <strong>Poids :</strong>22,5 KG.<br>
+                          <strong>ÉCLAIRAGE :</strong>AV/AR SUR BATTERIE.<br>
+                          <strong>ACCESSOIRES :</strong>PORTE BAGAGE - GARDES BOUE - ANTIVOL FER À CHEVAL.<br>
+                       </p>
+                   </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+              <a type="button" class="btn btn-success" href="location.html" >Louez moi !</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+<!-- Modal cb -->
+<div class="modal fade" id="paiementModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content text-center">
+      <div class="modal-header"> 
+              <h2 class="col-11">Payer</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="creditCardForm">
+          
+          <div class="payment">
+              <form>
+                  <div class="form-group owner">
+                      <label for="owner">Nom du titulaire</label>
+                      <input type="text" class="form-control" id="owner">
+                  </div>
+                  <div class="form-group CVV">
+                      <label for="cvv">CVV</label>
+                      <input type="text" class="form-control" id="cvv">
+                  </div>
+                  <div class="form-group" id="card-number-field">
+                      <label for="cardNumber">Card Number</label>
+                      <input type="text" class="form-control" id="cardNumber">
+                  </div>
+                  <div class="form-group" id="expiration-date">
+                      <label>Expiration Date</label>
+                      <select>
+                          <option value="01">January</option>
+                          <option value="02">February </option>
+                          <option value="03">March</option>
+                          <option value="04">April</option>
+                          <option value="05">May</option>
+                          <option value="06">June</option>
+                          <option value="07">July</option>
+                          <option value="08">August</option>
+                          <option value="09">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                      </select>
+                      <select>
+                          <option value="16"> 2016</option>
+                          <option value="17"> 2017</option>
+                          <option value="18"> 2018</option>
+                          <option value="19"> 2019</option>
+                          <option value="20"> 2020</option>
+                          <option value="21"> 2021</option>
+                      </select>
+                  </div>
+                  <div class="form-group" id="credit_cards">
+                      <img src="../assets/images/visa.jpg" id="visa">
+                      <img src="../assets/images/mastercard.jpg" id="mastercard">
+                      <img src="../assets/images/amex.jpg" id="amex">
+                  </div>
+                  <div class="form-group" id="pay-now">
+                      <button type="submit" class="btn btn-success" id="confirm-purchase">Confirm</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=&amp;sensor=false&amp;extension=.js"></script>
+    <script src="../assets/js/google-map.js"></script>
+</body>
+
+</html>
