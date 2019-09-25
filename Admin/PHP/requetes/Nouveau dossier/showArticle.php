@@ -1,5 +1,4 @@
 <?php
-require 'connect.php';
 $db = connect();
 
 // Variables 

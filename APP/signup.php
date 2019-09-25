@@ -1,3 +1,65 @@
+<?php
+require '../Admin/PHP/requetes/connect.php';
+$db = connect("veloloc");// AJOUTER nom BDD ICI !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+$id_signit = isset($_GET['idusers']) ? trim(htmlspecialchars($_GET['idusers'])):null;
+$pseudo = isset($_POST['pseudo']) ? htmlspecialchars($_POST['pseudo']):null;
+$email_utilisateurs = isset($_POST['email_utilisateurs']) ? trim(htmlspecialchars($_POST['email_utilisateurs'])):null;
+$email_utilisateurs2 = isset($_POST['email_utilisateurs2']) ? trim(htmlspecialchars($_POST['email_utilisateurs2'])):null;
+//Cryptage des mots de passe grace à hash('sha256',MON MOT DE PASSE)
+$mdp_utilisateurs = isset($_POST['mdp_utilisateurs']) ? hash('sha256',$_POST['mdp_utilisateurs']):null;
+$mdp_utilisateurs2 = isset($_POST['mdp_utilisateurs2']) ? hash('sha256',$_POST['mdp_utilisateurs2']):null;
+
+$pseudoLength = strlen($pseudo);
+
+
+if(isset($_POST['pseudo']) AND isset($_POST['email_utilisateurs']) AND isset($_POST['email_utilisateurs2']) AND isset($_POST['mdp_utilisateurs']) AND isset($_POST['mdp_utilisateurs2'])){
+	if($pseudoLength <= 255){
+// Verification que les deux emails correspondent.
+		if($email_utilisateurs == $email_utilisateurs2){
+// Impossibilité de rentrer autre qu'une adresse mail meme en changeant le type grace à F12.
+			if(filter_var($email_utilisateurs, FILTER_VALIDATE_EMAIL)){
+// Verification qu'aucune adresse mail correnspondantes ne soit déjà dans la base de donnée.
+				$reqmail = $db->prepare("SELECT * FROM users WHERE email_utilisateurs = ?");
+				$reqmail->execute(array($email_utilisateurs));
+				$mailexist = $reqmail->rowCount();
+				if($mailexist == 0){
+// Verification que les deux MDP correspondent.
+					if($mdp_utilisateurs == $mdp_utilisateurs2){
+						$insererMembre = $db->prepare("INSERT INTO users (.pseudo, mdp_utilisateurs , prenom_user, nom_user, email_utilisateurs)
+						VALUE (:pseudo,:mdp_utilisateurs, :Prenom , :nom,:email_utilisateurs , NOW(), 3)");
+						$insererMembre->bindParam(":pseudo", $pseudo, PDO::PARAM_STR);
+						$insererMembre->bindParam(":mdp_utilisateurs", $mdp_utilisateurs, PDO::PARAM_STR);
+						$insererMembre->bindParam(":prenom_user", $prenom_user, PDO::PARAM_STR);
+						$insererMembre->bindParam(":nom_user", $nom_user, PDO::PARAM_STR);
+						$insererMembre->bindParam(":email_utilisateurs", $email_utilisateurs, PDO::PARAM_STR);
+						$insererMembre->bindParam(":adresse1", $adresse1, PDO::PARAM_STR);
+						$insererMembre->bindParam(":adresse2", $adresse2, PDO::PARAM_STR);
+						$insererMembre->bindParam(":codePostal", $codePostal, PDO::PARAM_STR);
+						$insererMembre->execute();
+						$erreur = "Votre compte a bien été enregistré !!!";
+						// header('Location: connected.php');
+					}else{
+						$erreur = "Vos mots de passe ne correspondent pas !!!";
+					}
+				}else{
+					$erreur = "Cette adresse mail est déjà utilisée !!!";
+				}
+			}else{
+				$erreur = "Votre adresse mail n'est pas valide !!!";
+			}
+		}else{
+			$erreur = "Vos adresses mail ne correspondent pas !!!";
+		}
+	}else{
+		$erreur = "Votre pseudo est trop long !!!";
+	}
+}else{
+	$erreur = "Tous les champs doivent etre remplis !!!";
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -97,7 +159,11 @@
 							<p class="text-center text-muted">Si vous avez deja un compte, veuilliez vous <a href="signin.html">connecter</a> . </p>
 							<hr>
 
-							<form action="../Admin/PHP/requetes/addUser.php" method="post" >
+							<form action="" method="post" >
+								<div class="form-group">
+								<label for="pseudo">Votre pseudo : </label>
+								<input type="text" class="form-control" name="pseudo" id="pseudo" aria-describedby="pseudoHelp" value="<?php if(isset($pseudo)){echo $pseudo;} ?>">
+								</div>
 								<div class="top-margin">
 									<label>Prenom </label>
 									<input type="text" name="prenom_user" class="form-control">
@@ -106,9 +172,13 @@
 									<label>Nom</label>
 									<input type="text" name="nom_user" class="form-control">
 								</div>
-								<div class="top-margin">
-									<label>Addresse email <span class="text-danger">*</span></label>
-									<input type="email" name="email_user" class="form-control">
+								<div class="form-group">
+								<label for="email_utilisateurs">Adresse e-mail : </label>
+								<input type="email" class="form-control" name="email_utilisateurs" id="email_utilisateurs" aria-describedby="emailHelp" value="<?php if(isset($email_utilisateurs)){echo $email_utilisateurs;} ?>">
+								</div>
+								<div class="form-group">
+								<label for="email_utilisateurs2">Répetez votre e-mail : </label>
+								<input type="email" class="form-control" name="email_utilisateurs2" id="email_utilisateurs2" aria-describedby="emailHelp" value="<?php if(isset($email_utilisateurs2)){echo $email_utilisateurs2;} ?>">
 								</div>
 								<div class="top-margin">
 										<label> Adresse 1:</label>
@@ -144,14 +214,15 @@
 								</div>
 
 								<div class="row top-margin">
-									<div class="col-sm-6">
-										<label>Mot de passe <span class="text-danger">*</span></label>
-										<input type="password" name="pass" class="form-control">
-									</div>
-									<div class="col-sm-6">
-										<label>Confirmez le mot de passe <span class="text-danger">*</span></label>
-										<input type="password" name="pass" class="form-control">
-									</div>
+								<div class="col-6 form-group">
+								<label for="mdp_utilisateurs">Mot de passe :</label>
+								<input type="password" class="form-control" name="mdp_utilisateurs" id="mdp_utilisateurs" placeholder="Mot de passe">
+								</div>
+								<div class="col-6 form-group">
+								<label for="mdp_utilisateurs2">Répetez votre mot de passe :</label>
+								<input type="password" class="form-control" name="mdp_utilisateurs2" id="mdp_utilisateurs2" placeholder="Mot de passe">
+								</div>								
+								</div>
 								</div>
 
 								<hr>
@@ -169,10 +240,17 @@
 								</div>
 							</form>
 						</div>
+					<div class="text-danger">
+							<?php	
+							if(isset($erreur)){
+							echo $erreur;
+							}
+							?>
 					</div>
-
 				</div>
-				
+					
+				</div>
+
 			</article>
 			<!-- /Article -->
 

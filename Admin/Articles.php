@@ -1,3 +1,4 @@
+<?php require('PHP/connection.php'); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,7 +21,6 @@
 </head>
 
 <body>
-
   <!--------bar de navigation -------->
   <header id="mainnav" class="row">
     <!--nav bar et carousel -->
@@ -79,34 +79,119 @@
 
 
     </div>
-    <!--------fin bar de navigation -------->
+    
   </header>
+  <!--------fin bar de navigation ---->
 
-  <!-- container -->
+
+
+
+<!-- container -->
   <div class="container">
     <h2 class="text-center ">Bienvenue, Admin</h2>
     <hr>
     <div class="row">
       <div class="col-9">
         <h4 >Vous avez sélectioné la ville de </h4>
-        </div>
-        <div class="col-3">
+      </div>
+      <div class="col-3">
           <button class="mb-3 btn-success" >
-        <a class="nav-link dropdown-toggle text-light " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" >
-          Choisir votre ville 
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Paris</a>
-          <a class="dropdown-item" href="#">Bordeaux</a>
-          <a class="dropdown-item" href="#">Lille</a>
-          <a class="dropdown-item" href="#">Lyon</a>
-        </div>
-          </button>
-        </div>
-        
-    </div>
+              <a class="nav-link dropdown-toggle text-light " href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" >
+              Choisir votre ville 
+              </a>
 
-    <div class="border">
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Paris</a>
+              <a class="dropdown-item" href="#">Bordeaux</a>
+              <a class="dropdown-item" href="#">Lille</a>
+              <a class="dropdown-item" href="#">Lyon</a>
+              </div>
+          </button>
+      </div>
+    </div>
+  </div>
+
+<div class="container">
+<?php
+    // --------------------------------
+    // La requete (exemple) : tous les "objet", classés par "id".
+    $query = "SELECT article.idArticle AS id_article,
+     article.nomArticle AS nom_Produit, 
+     article.categorieArticle AS categories,
+      article.stock AS stock, 
+      article.prixArticle AS prix,
+      article.imageArticle AS img_url,
+      article.actif AS actif 
+      FROM article, ville WHERE article.idArticle = ville.idville ORDER BY article.idArticle ASC;";
+      try {
+      $pdo_select = $pdo->prepare($query);
+      $pdo_select->execute();
+      $NbreData = $pdo_select->rowCount();	// nombre d'enregistrements (lignes)
+      $rowAll = $pdo_select->fetchAll();
+      } catch (PDOException $e){ echo 'Erreur SQL : '. $e->getMessage().'<br/>'; die(); }
+    // --------------------------------
+    // affichage
+    if ($NbreData != 0) 
+    {
+?>
+
+
+    
+  <h2>Products</h2>
+  
+	<table class="table table-hover">
+		  <thead class="thead-dark">
+		    <tr>
+			    <th scope="col">#</th>
+			    <th scope="col">Nom</th>
+			    <th scope="col">Categorie</th>
+			    <th scope="col">stock</th>
+			    <th scope="col">prix</th>
+          <th scope="col">img_url</th>
+          <th scope="col">actif</th>
+		    </tr>
+      </thead>
+      
+		<tbody>
+
+		<?php
+		// pour chaque ligne (chaque enregistrement)
+		foreach ( $rowAll as $row ) 
+		{
+		// DONNEES A AFFICHER dans chaque cellule de la ligne
+		?>
+		<tr>
+			<th scope="row"><?php echo $row['id_article']; ?>
+			<td><?php echo $row['nom_Produit']; ?></td>
+			<td><?php echo $row['categories']; ?></td>
+			<td><?php echo $row['stock']; ?></td>
+      <td><?php echo $row['prix']; ?></td>
+      <td><?php echo $row['img_url']; ?></td> 
+      <td><?php echo $row['actif']; ?></td> 
+			<td>
+				<a href="#"><button class="btn btn-primary" type="submit"><i class="fa fa-bars" aria-hidden="true"></i> Lire</button></a>
+				<a href="#"><button class="btn btn-warning" type="submit"><i class="fa fa-spinner" aria-hidden="true"></i> Modifier</button></a>
+				<a href="#"><button class="btn btn-danger" type="submit"><i class="fa fa-minus-square" aria-hidden="true"></i> Supprimer</button></a>
+			</td>
+    </tr>
+    
+		<?php
+		}
+		?>
+		</tbody>
+	</table>
+</div>
+
+	<?php
+} else { 
+		?>
+
+	pas de données à afficher
+<?php
+}
+?>
+
+    <!-- <div class="border">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -170,12 +255,15 @@
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
-  </div>
-  <!-- /container -->
+    </div> -->
+  <!-- </div>
+  </div> -->
+</div>
 
-  <div class="container">
+
+
+  <!-- container Ajoout d'article BDD -->
+    <div class="container">
     <h3 class="text-left">Ajouter un article :</h3><br>
 
     <form method="post" action="PHP/article.php">
@@ -216,12 +304,8 @@
 
 
 
-  </div>
-
-
-
-
-
+    </div>
+  <!-- /container Ajoout d'article BDD -->
 
   <footer id="footer" class="top-space">
 
@@ -295,6 +379,7 @@
       </div>
     </div>
   </footer>
+
   <!--modal vélo classique-->
   <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -355,7 +440,7 @@
     </div>
   </div>
 
-  <!--/modal-->
+ 
   <!-- modal 1 edit article -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
