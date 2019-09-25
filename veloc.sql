@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 19 sep. 2019 à 14:28
+-- Généré le :  mer. 25 sep. 2019 à 12:36
 -- Version du serveur :  5.7.26
--- Version de PHP :  7.2.18
+-- Version de PHP :  7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -144,8 +144,8 @@ CREATE TABLE IF NOT EXISTS `paniers` (
 DROP TABLE IF EXISTS `sexe`;
 CREATE TABLE IF NOT EXISTS `sexe` (
   `id_sexe` int(11) NOT NULL AUTO_INCREMENT,
-  `sexecourt` varchar(1) NOT NULL COMMENT 'm ou h',
-  `sexelong` varchar(8) NOT NULL COMMENT 'masculin ou feminin',
+  `Homme` varchar(55) NOT NULL,
+  `femmes` varchar(55) NOT NULL,
   PRIMARY KEY (`id_sexe`),
   UNIQUE KEY `id_sexe_UNIQUE` (`id_sexe`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `sexe` (
 -- Déchargement des données de la table `sexe`
 --
 
-INSERT INTO `sexe` (`id_sexe`, `sexecourt`, `sexelong`) VALUES
+INSERT INTO `sexe` (`id_sexe`, `Homme`, `femmes`) VALUES
 (1, 'H', 'homme'),
 (2, 'F', 'femme');
 
