@@ -180,7 +180,7 @@
                             <strong>Pro :</strong> À partir de 0,90€ /H </p>
                         <p>
                             <strong>Particulier :</strong> À partir de 0,90€ /H </p>
-                        <a name="" id="" class=" col-10 btn btn-success justify-content-center d-flex align-items-center toto" href="../signin.html" role="button">Vite, je réserve !</a>
+                        <a name="" id="" class=" col-10 btn btn-success justify-content-center d-flex align-items-center toto" href="APP/signin.html" role="button">Vite, je réserve !</a>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6 highlight">
@@ -241,33 +241,44 @@
             <div id="imgVille" class="row">
                 <div class="col-12  col-sm-6 col-md-3  text-center">
                     <h3>Lille</h3>
+                    <a  type="button" onclick="getVilleLille()" id="lille" name="indexLille" >
                     <img src="assets/images/lille4.jpg" alt="lille">
+                    </a>
                 </div>
                 <div class="col-12 col-sm-6 col-md-3  text-center">
                     <h3>Paris </h3>
-                    <a><img src="assets/images/paris.jpg" alt="paris"></a>
+                    <a  type="button" onclick="getVilleParis()" id="paris" name="indexParis" >
+                        <img src="assets/images/paris.jpg" alt="paris">
+                    </a>
+                    
                 </div>
                 <div class="col-12 col-sm-6 col-md-3 text-center ">
                     <h3>Lyon</h3>
-                    <img src="assets/images/lyon.png" alt="lyon">
+                    <a  type="button" onclick="getVilleLyon()" id="lyon" name="indexLyon" >
+                        <img src="assets/images/lyon.png" alt="lyon">
+                    </a>
+                    
 
                     </p>
                 </div>
                 <div class="col-12 col-sm-6 col-md-3 text-center">
                     <h3>Bordeaux</h3>
-                    <img src="assets/images/bordeaux.jpg" alt="bordeaux">
+                    <a  type="button" onclick="getVilleBordeaux()" id="bordeaux" name="indexBordeaux" >
+                        <img src="assets/images/bordeaux.jpg" alt="bordeaux">
+                    </a>
+                    
                 </div>
             </div>
         </div>
     </div>
     <!-- /container ville -->
+    <!-- GOOGLE MAP -->
+    <div class="mt-4 row d-flex justify-content-center">
+        <iframe id="iframe" src="https://www.google.com/maps/d/embed?mid=1MAvgFoHg9MbNU1Rn23Us8sj2TfYPLmDx" width=100% height="480"></iframe>
+    </div>
+<!-- // GOOGLE MAP -->
 
 
-    <!-- Map google-->
-    <section class="container-full top-space">
-        <div id="map"></div>
-    </section>
-    <!--fin map google -->
 
     <!--footer-->
     <footer id="footer">
@@ -421,8 +432,7 @@
 
 
     <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=&amp;sensor=false&amp;extension=.js"></script>
-    <script src="assets/js/google-map.js"></script>
+    <script src='assets/js/main.js'></script>
     <!--/scripts-->
 
 </body>
